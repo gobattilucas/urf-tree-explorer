@@ -22,6 +22,7 @@ iframe{border:0;width:100%;display:block;background:#29292e}.scene{height:590px}
 [hidden]{display:none!important}.cardfoot{padding:12px 20px;font-size:13px;border-top:1px solid #444449}
 #coords{font-variant-numeric:tabular-nums}.mapmeta{padding:16px 20px}.mapmeta a{display:inline-block;margin-top:12px}
 footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900px){main{padding:16px}header{display:block}.grid{grid-template-columns:1fr}.component-grid{grid-template-columns:1fr}.wide{grid-column:auto}.warpcard .cardhead{width:190px;padding:14px;font-size:13px}.warpcard h2{font-size:16px}.toolbar{margin-top:18px}.scene{height:500px}.context{height:620px}.warp{height:730px}}
+.download-buttons{display:flex;gap:10px;flex-wrap:wrap}.download-buttons button{text-align:left;font-size:14px}.download-group .note{margin-bottom:10px}.download-note{margin-top:10px}dialog{color:#ededf0;background:#29292e;border:1px solid #55555d;border-radius:12px;max-width:440px;width:calc(100% - 32px);padding:24px}dialog::backdrop{background:rgba(0,0,0,.65)}dialog input{display:block;width:100%;margin:8px 0 12px;padding:10px;background:#fff;color:#000;border:1px solid #aaa;border-radius:6px;font:inherit}dialog .toolbar{margin-top:16px}
 </style></head><body><main>
 <header><div><h1>☀️ Thermal Clouds: 🌳 Tree radiant warping explorer</h1>
 <p class="muted">1 Select a tree in the thermal cloud → 2 See what influences radiation around that tree → 3 Check its real-life position → 4 Inspect MRT → 5 Compare tree-induced change → 6 Separate SW and LW → 7 Explore the warped field.</p></div>
@@ -32,12 +33,12 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <section class="card"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
 <p class="note">Click a green crown to select a tree. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p><div class="toolbar selection-controls"><div class="selection-row"><label for="treeSelect">Tree</label><select id="treeSelect" disabled><option>Loading…</option></select>
 </div><div class="selection-row"><label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">6 am</option><option value="0800">8 am</option><option value="1100">11 am</option><option value="1300" selected>1 pm</option></select></div></div></div>
-<iframe id="scene" class="scene" src="scene.html?v=20261011T072013060985" title="Dubai point cloud and 107 selectable trees"></iframe>
+<iframe id="scene" class="scene" src="scene.html?v=20261011T075435585926" title="Dubai point cloud and 107 selectable trees"></iframe>
 <div class="cardfoot">All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
 <section class="card"><div class="cardhead"><h2><span class="number">02</span>MRT contributors</h2>
 <p class="note">Receptor colours show mean radiant temperature (MRT). The surrounding points show sampled surfaces, reflections and solar-glint sources contributing to radiation around the tree.</p></div>
 <div id="contextEmpty" class="empty">Select a tree with exported results.</div>
-<iframe id="context" class="context" hidden title="Full extent of MRT contributor points"></iframe>
+<iframe id="context" class="context" hidden title="Full extent of MRT contributor points"></iframe><div class="cardfoot download-group" data-download-group="context"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="context" disabled>⬇️ ☀️ 🌳 MRT context · PLY</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div>
 <div class="cardfoot">Standing-tree sampled pathways. Counts describe sampling frequency, not energy weights or attribution of the tree-removal effect.</div></section>
 <section class="card mapcard"><div class="cardhead"><h2><span class="number">03</span>Google Maps location</h2>
 <p class="note">Approximate geographic position</p></div><div class="mapmeta"><strong id="mapTree">T02</strong>
@@ -48,26 +49,31 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <section class="card wide warpcard"><div class="cardhead"><h2><span class="number">04</span>MRT around the tree</h2>
 <p class="note">Colours show mean radiant temperature with the tree standing. Heights follow the real local terrain. Choose a receptor height to inspect its radiation field; the pedestrian is 1.8 m tall, and the trunk and branches are schematic references.</p></div>
 <div id="mrtEmpty" class="empty">Select a tree with exported results.</div>
-<iframe id="mrt" class="warp" hidden loading="lazy" title="Terrain-following MRT around the tree"></iframe></section>
+<iframe id="mrt" class="warp" hidden loading="lazy" title="Terrain-following MRT around the tree"></iframe><div class="cardfoot download-group" data-download-group="mrt"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="mrt_all" disabled>⬇️ ☀️ MRT · all heights</button><button type="button" data-download="mrt_1p1m" disabled>⬇️ ☀️ MRT · 1.1 m</button><button type="button" data-download="tree" disabled>⬇️ 🌳 Tree points only</button><button type="button" data-download="mrt_tree" disabled>⬇️ ☀️ 🌳 All MRT + tree</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div></section>
 <section class="card wide warpcard"><div class="cardhead"><h2><span class="number">05</span>Tree-induced ΔMRT</h2>
 <p class="note">Colours show MRT with the tree minus MRT without it: negative values indicate cooling and positive values warming. Points and the grey-white ground retain local topography; no height warping is applied. The pedestrian, trunk and branches provide schematic scale.</p></div>
 <div id="deltaEmpty" class="empty">Select a tree with exported results.</div>
-<iframe id="delta" class="warp" hidden loading="lazy" title="Terrain-following delta MRT around the tree"></iframe></section>
+<iframe id="delta" class="warp" hidden loading="lazy" title="Terrain-following delta MRT around the tree"></iframe><div class="cardfoot download-group" data-download-group="delta"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="delta_all" disabled>⬇️ ☀️ ΔMRT · all heights</button><button type="button" data-download="delta_1p1m" disabled>⬇️ ☀️ ΔMRT · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div></section>
 <section class="card wide"><div class="cardhead"><h2><span class="number">06</span>Shortwave and longwave radiation</h2>
 <p class="note">Compare the standing-tree contributions or their changes after tree removal. Ground and receptor heights retain local topography in both views.</p>
 <div class="toolbar" role="group" aria-label="Component display mode"><button id="componentMRT" type="button" aria-pressed="true" disabled>MRT</button><button id="componentDelta" type="button" aria-pressed="false" disabled>ΔMRT</button></div>
 <p id="componentDefinition" class="note">Total MRT = LW-only baseline [°C] + SW increment [K].</p></div>
 <div class="component-grid">
-<div><div class="componenthead"><h3>SW · shortwave</h3><p class="note">Sunlight reaching the person: direct and diffuse solar radiation, surface reflections and concentrated solar glints.</p><p id="swMeasure" class="measure">SW temperature increment [K]</p></div><div id="swEmpty" class="empty">Select a tree with exported results.</div><iframe id="sw" class="component" hidden loading="lazy" title="Shortwave radiation contribution"></iframe></div>
-<div><div class="componenthead"><h3>LW · longwave</h3><p class="note">Thermal infrared radiation emitted by surrounding surfaces, vegetation and the sky, including modelled directional reflections.</p><p id="lwMeasure" class="measure">LW-only MRT baseline [°C]</p></div><div id="lwEmpty" class="empty">Select a tree with exported results.</div><iframe id="lw" class="component" hidden loading="lazy" title="Longwave radiation contribution"></iframe></div>
+<div><div class="componenthead"><h3>SW · shortwave</h3><p class="note">Sunlight reaching the person: direct and diffuse solar radiation, surface reflections and concentrated solar glints.</p><p id="swMeasure" class="measure">SW temperature increment [K]</p></div><div id="swEmpty" class="empty">Select a tree with exported results.</div><iframe id="sw" class="component" hidden loading="lazy" title="Shortwave radiation contribution"></iframe><div class="cardfoot download-group" data-download-group="sw"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="MRT_SW_all" disabled>⬇️ ☀️ SW increment · all heights</button><button type="button" data-download="MRT_SW_1p1m" disabled>⬇️ ☀️ SW increment · 1.1 m</button><button type="button" data-download="deltaMRT_SW_all" disabled>⬇️ ☀️ ΔSW · all heights</button><button type="button" data-download="deltaMRT_SW_1p1m" disabled>⬇️ ☀️ ΔSW · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div></div>
+<div><div class="componenthead"><h3>LW · longwave</h3><p class="note">Thermal infrared radiation emitted by surrounding surfaces, vegetation and the sky, including modelled directional reflections.</p><p id="lwMeasure" class="measure">LW-only MRT baseline [°C]</p></div><div id="lwEmpty" class="empty">Select a tree with exported results.</div><iframe id="lw" class="component" hidden loading="lazy" title="Longwave radiation contribution"></iframe><div class="cardfoot download-group" data-download-group="lw"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="MRT_LW_all" disabled>⬇️ ☀️ LW baseline · all heights</button><button type="button" data-download="MRT_LW_1p1m" disabled>⬇️ ☀️ LW baseline · 1.1 m</button><button type="button" data-download="deltaMRT_LW_all" disabled>⬇️ ☀️ ΔLW · all heights</button><button type="button" data-download="deltaMRT_LW_1p1m" disabled>⬇️ ☀️ ΔLW · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div></div>
 </div></section>
 <section class="card wide warpcard"><div class="cardhead"><h2><span class="number">07</span>Warped ΔMRT visualiser</h2>
 <p class="note">Relief shows ΔMRT with the tree minus without it: blue valleys indicate cooling, white is near zero and red peaks indicate warming. Layers are terrain-flattened; relief encodes temperature, and the pedestrian, trunk and branches are schematic references.</p></div>
 <div id="warpEmpty" class="empty">Select a tree with exported results.</div>
-<iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe>
+<iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe><div class="cardfoot download-group" data-download-group="warp"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="warped_all" disabled>⬇️ ☀️ Warped ΔMRT · all heights</button><button type="button" data-download="warped_1p1m" disabled>⬇️ ☀️ Warped ΔMRT · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div>
 </section>
 </div><footer>Precomputed results · first case T02 / 1300. Rotate, inspect and change display layers; new radiation calculations are prepared offline.</footer>
-</main><script>
+</main><dialog id="downloadDialog" aria-labelledby="downloadDialogTitle"><form id="downloadForm">
+<h2 id="downloadDialogTitle">Download protected PLY</h2><p id="downloadFileLabel"></p>
+<label for="downloadPassword">Download passphrase</label><input id="downloadPassword" type="password" autocomplete="off" required>
+<p id="downloadMessage" role="status" aria-live="polite">Enter the passphrase shared by the author.</p>
+<div class="toolbar"><button id="downloadSubmit" type="submit">⬇️ Unlock &amp; download</button><button id="downloadCancel" type="button">Cancel</button></div>
+</form></dialog><script>
 'use strict';
 const CONFIG={"t02EmbedUrl": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5189.352144655342!2d55.167975!3d25.093161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDA1JzM1LjQiTiA1NcKwMTAnMDQuNyJF!5e1!3m2!1sen!2sae!4v1791680782778!5m2!1sen!2sae", "apiKey": ""};
 const $=id=>document.getElementById(id);
@@ -83,7 +89,7 @@ async function readJSON(path,optional=false){
 function clearPlot(frame,empty,message){$(frame).hidden=true;$(frame).src='about:blank';$(empty).hidden=false;$(empty).textContent=message}
 function showPlot(frame,empty,path,revision){$(empty).hidden=true;$(frame).hidden=false;$(frame).src=path+'?v='+encodeURIComponent(revision)}
 function clearAnalysis(message){
-  currentManifest=null;
+  currentManifest=null;cancelDownload();refreshDownloads();
   $('componentMRT').disabled=true;$('componentDelta').disabled=true;
   for(const frame of analysisFrames)clearPlot(frame,frame+'Empty',message);
 }
@@ -135,11 +141,79 @@ async function selectTree(id){
     showPlot('mrt','mrtEmpty',m.mrt_html,m.generated_at);
     showPlot('delta','deltaEmpty',m.delta_html,m.generated_at);
     showPlot('warp','warpEmpty',m.warping_html,m.generated_at);
-    currentManifest=m;$('componentMRT').disabled=false;$('componentDelta').disabled=false;
+    currentManifest=m;refreshDownloads();$('componentMRT').disabled=false;$('componentDelta').disabled=false;
     setComponentMode(componentMode);updateMap(t,m);
 
   }catch(error){if(token!==selectionToken)return;clearAnalysis('Selected export could not be loaded.');$('status').textContent=error.message;$('status').hidden=false}
 }
+
+// Download transport is separate from button placement and PLY generation.
+let pendingDownload=null, downloadBusy=false;
+const decode64=value=>Uint8Array.from(atob(value), c=>c.charCodeAt(0));
+function validDownload(item, manifest){
+  const base=manifest?.context_html?.slice(0,manifest.context_html.lastIndexOf('/')+1);
+  return !!base && item?.cipher==='AES-256-GCM' && item.kdf==='PBKDF2-SHA256'
+    && item.iterations===600000 && typeof item.path==='string'
+    && item.path.startsWith(base+'downloads/') && /^[a-zA-Z0-9_/.\-]+\.ply\.enc$/.test(item.path)
+    && !item.path.includes('..') && /^[a-zA-Z0-9_.\-]+\.ply$/.test(item.filename);
+}
+function refreshDownloads(){
+  const files=currentManifest?.downloads?.protection==='encrypted-ply-v1'?currentManifest.downloads.files:{};
+  for(const button of document.querySelectorAll('[data-download]')){
+    const item=files?.[button.dataset.download];
+    button.disabled=downloadBusy || !validDownload(item,currentManifest);
+    button.title=button.disabled?'Downloads are not available for this selection.':'Password-protected PLY download';
+  }
+  for(const note of document.querySelectorAll('.download-note'))note.textContent=currentManifest
+    ? (currentManifest.downloads?'All heights includes hidden layers. A passphrase is required.':'Protected PLY files have not been exported for this result yet.')
+    : 'Select a tree/time with exported downloads.';
+}
+function cancelDownload(){
+  pendingDownload=null;$('downloadPassword').value='';
+  if($('downloadDialog').open)$('downloadDialog').close();
+}
+$('downloadCancel').addEventListener('click',cancelDownload);
+$('downloadDialog').addEventListener('cancel',cancelDownload);
+$('downloadDialog').addEventListener('close',()=>{$('downloadPassword').value='';pendingDownload=null});
+for(const button of document.querySelectorAll('[data-download]'))button.addEventListener('click',()=>{
+  const item=currentManifest?.downloads?.files?.[button.dataset.download];
+  if(!validDownload(item,currentManifest) || downloadBusy)return;
+  pendingDownload={item,token:selectionToken};
+  $('downloadFileLabel').textContent=item.filename;
+  $('downloadPassword').value='';$('downloadSubmit').disabled=false;
+  $('downloadMessage').textContent='Enter the passphrase shared by the author.';
+  $('downloadDialog').showModal();$('downloadPassword').focus();
+});
+$('downloadForm').addEventListener('submit',async event=>{
+  event.preventDefault();if(downloadBusy || !pendingDownload)return;
+  const request=pendingDownload;
+  let password=$('downloadPassword').value;
+  if(!password)return;
+  $('downloadPassword').value='';downloadBusy=true;$('downloadSubmit').disabled=true;refreshDownloads();
+  $('downloadMessage').textContent='Unlocking download…';
+  try{
+    if(!window.isSecureContext || !window.crypto?.subtle)throw new Error('Use HTTPS or localhost to unlock downloads.');
+    const response=await fetch(request.item.path,{cache:'no-store'});
+    if(!response.ok)throw new Error('Download file could not be loaded.');
+    const ciphertext=await response.arrayBuffer();
+    const material=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveKey']);
+    password=null;
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:decode64(request.item.salt),iterations:request.item.iterations},
+      material,{name:'AES-GCM',length:256},false,['decrypt']);
+    let plaintext;
+    try{plaintext=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode64(request.item.nonce),additionalData:decode64(request.item.aad),tagLength:128},key,ciphertext)}
+    catch{throw new Error('Incorrect passphrase or damaged file. Please try again.')}
+    // Cancelling or changing tree/time prevents an in-flight result from downloading.
+    if(pendingDownload!==request || request.token!==selectionToken)return;
+    if(new TextDecoder().decode(plaintext.slice(0,4))!=='ply\n')throw new Error('Unlocked file is not a PLY.');
+    const url=URL.createObjectURL(new Blob([plaintext],{type:'application/octet-stream'}));
+    const link=document.createElement('a');link.href=url;link.download=request.item.filename;
+    document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+    cancelDownload();
+  }catch(error){if(pendingDownload===request){$('downloadMessage').textContent=error.message;$('downloadPassword').focus()}}
+  finally{password=null;downloadBusy=false;$('downloadSubmit').disabled=false;refreshDownloads()}
+});
+
 $('treeSelect').addEventListener('change',event=>{selectTree(event.target.value);history.replaceState(null,'','#'+event.target.value)});
 $('timeSelect').addEventListener('change',event=>{currentSlot=event.target.value;selectTree(currentId)});
 window.addEventListener('message',event=>{
