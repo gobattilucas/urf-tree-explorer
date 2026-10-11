@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tree radiation explorer — Dubai</title>
+<title>Thermal Clouds: tree warping explorer</title>
 <meta name="description" content="Explore 107 Dubai trees, precomputed MRT contributors and warped temperature differences.">
 <style>
 :root{color-scheme:light;--ink:#17332b;--muted:#5d706a;--line:#dce5df;--accent:#236c4a}
@@ -13,39 +13,37 @@ select,button,a.button{font:inherit;border:1px solid #bdcdc3;border-radius:7px;p
 button,a.button{cursor:pointer;text-decoration:none}button:hover,a.button:hover{background:#edf4ee}select{min-width:155px}
 :focus-visible{outline:3px solid #d39a2e;outline-offset:3px}.summary{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
 .pill{border:1px solid var(--line);background:white;border-radius:20px;padding:5px 12px;font-size:13px}
-.status{padding:11px 15px;background:#e7f1e9;border-radius:8px;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,1fr);gap:20px}.card{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.mapcard{display:flex;flex-direction:column}.mapcard .map{flex:1;min-height:400px}.status{padding:11px 15px;background:#e7f1e9;border-radius:8px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
 .wide{grid-column:1/-1}.cardhead{padding:18px 20px 12px;border-bottom:1px solid #eef1ed}.number{color:var(--accent);margin-right:8px}
-iframe{border:0;width:100%;display:block;background:white}.scene{height:590px}.context{height:660px}.warp{height:790px}.map{height:420px}
+iframe{border:0;width:100%;display:block;background:white}.scene{height:590px}.context{height:640px}.warp{height:640px}.map{height:420px}
 .empty{min-height:250px;display:grid;place-content:center;text-align:center;padding:30px;color:var(--muted);background:#fafcf9}
 [hidden]{display:none!important}.cardfoot{padding:12px 20px;font-size:13px;border-top:1px solid #eef1ed}
 #coords{font-variant-numeric:tabular-nums}.mapmeta{padding:16px 20px}.mapmeta a{display:inline-block;margin-top:12px}
 footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900px){main{padding:16px}header{display:block}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.toolbar{margin-top:18px}.scene{height:500px}.context{height:620px}.warp{height:730px}}
 </style></head><body><main>
-<header><div><div class="eyebrow">Urban radiant field · Dubai · v3</div><h1>Tree radiation explorer</h1>
+<header><div><div class="eyebrow">Urban radiant field · Dubai · v3</div><h1>Thermal Clouds: tree warping explorer</h1>
 <p class="muted">Select a tree in the scene to explore its location and calculated radiation field.</p></div>
 <div class="toolbar"><label for="treeSelect">Tree</label><select id="treeSelect" disabled><option>Loading…</option></select>
-<button id="near" type="button">Near selected tree</button><button id="whole" type="button">Whole scene</button></div></header>
-<div class="summary"><span class="pill">107 candidate trees</span><span class="pill" id="selectedName">T02</span>
-<span class="pill" id="assessment">Catalogue loading</span><span class="pill" id="extraction">—</span></div>
-<div id="status" class="status" role="status" aria-live="polite">Loading the tree catalogue…</div>
+<label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">6 am</option><option value="0800">8 am</option><option value="1100">11 am</option><option value="1300" selected>1 pm</option></select></div></header>
+<div id="status" class="status" role="status" aria-live="polite" hidden></div>
 <div class="grid">
-<section class="card wide"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
-<p class="note">Click a green crown or seed marker. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p></div>
-<iframe id="scene" class="scene" src="scene.html?v=20261011T052749143233" title="Dubai point cloud and 107 selectable trees"></iframe>
+<section class="card"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
+<p class="note">Click a green crown or seed marker. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p><button id="whole" type="button">Whole scene</button></div>
+<iframe id="scene" class="scene" src="scene.html?v=20261011T054653714098" title="Dubai point cloud and 107 selectable trees"></iframe>
 <div class="cardfoot">Notebook 04 Part 4 display data. All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
-<section class="card"><div class="cardhead"><h2><span class="number">02</span>MRT contributors</h2>
-<p class="note">Notebook 03 Part 7 · full contributor extent</p></div>
-<div id="contextEmpty" class="empty">Select a tree with exported results.</div>
-<iframe id="context" class="context" hidden title="Full extent of MRT contributor points"></iframe>
-<div class="cardfoot">Standing-tree sampled pathways. Counts describe sampling frequency, not energy weights or attribution of the tree-removal effect.</div></section>
-<section class="card"><div class="cardhead"><h2><span class="number">03</span>Google Maps location</h2>
+<section class="card mapcard"><div class="cardhead"><h2><span class="number">02</span>Google Maps location</h2>
 <p class="note">Approximate geographic position</p></div><div class="mapmeta"><strong id="mapTree">T02</strong>
 <p id="coords">—</p><p id="geoNote" class="note">Mesh-derived coordinates; drone-GPS uncertainty is a few metres.</p>
 <a id="mapLink" class="button" target="_blank" rel="noopener noreferrer">Open in Google Maps ↗</a></div>
 <div id="mapEmpty" class="empty">Map embed has not been configured.</div>
 <iframe id="map" class="map" hidden title="Google Maps location of the selected tree" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></section>
-<section class="card wide"><div class="cardhead"><h2><span class="number">04</span>Warped ΔMRT visualiser</h2>
+<section class="card"><div class="cardhead"><h2><span class="number">03</span>MRT contributors</h2>
+<p class="note">Notebook 03 Part 7 · full contributor extent</p></div>
+<div id="contextEmpty" class="empty">Select a tree with exported results.</div>
+<iframe id="context" class="context" hidden title="Full extent of MRT contributor points"></iframe>
+<div class="cardfoot">Standing-tree sampled pathways. Counts describe sampling frequency, not energy weights or attribution of the tree-removal effect.</div></section>
+<section class="card"><div class="cardhead"><h2><span class="number">04</span>Warped ΔMRT visualiser</h2>
 <p class="note">Notebook 03 Part 9 · blue valleys = cooling · white = near zero · red peaks = warming</p></div>
 <div id="warpEmpty" class="empty">Select a tree with exported results.</div>
 <iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe>
@@ -55,7 +53,7 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 'use strict';
 const CONFIG={"t02EmbedUrl": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d5189.352144655342!2d55.167975!3d25.093161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDA1JzM1LjQiTiA1NcKwMTAnMDQuNyJF!5e1!3m2!1sen!2sae!4v1791680782778!5m2!1sen!2sae", "apiKey": ""};
 const $=id=>document.getElementById(id);
-let trees=[],lookup=new Map(),availability={results:{}},currentId='T02',selectionToken=0;
+let trees=[],lookup=new Map(),availability={results:{}},currentId='T02',currentSlot='1300',selectionToken=0;
 const targetOrigin=location.protocol==='file:'?'*':location.origin;
 function sendScene(type,extra={}){$('scene').contentWindow?.postMessage({type,treeId:currentId,...extra},targetOrigin)}
 async function readJSON(path,optional=false){
@@ -78,15 +76,13 @@ function updateMap(t,position=null){
 async function selectTree(id){
   const t=lookup.get(id); if(!t)return;
   const token=++selectionToken; currentId=id; $('treeSelect').value=id;
-  $('selectedName').textContent=id+' · '+(t.crown_type||'crown type unassessed');
-  $('assessment').textContent='Recorded checks: '+t.notebook_test_status;
-  $('extraction').textContent=t.extraction_status==='ok'?'Sampled crown available':'Seed marker; crown extraction unavailable';
+  $('status').hidden=true;
   sendScene('urf:highlight'); updateMap(t);
   clearPlot('context','contextEmpty','Loading selected results…'); clearPlot('warp','warpEmpty','Loading selected results…');
   const result=availability.results?.[id];
-  if(!result){const msg=id+' — MRT analysis is not available yet.';
+  if(!result || result.slot!==currentSlot){const msg=id+' / '+$('timeSelect').selectedOptions[0].textContent+' — MRT analysis is not available yet.';
     clearPlot('context','contextEmpty',msg);clearPlot('warp','warpEmpty',msg);
-    $('status').textContent=msg+' Location and scene selection remain available.';return}
+    return}
   $('status').textContent='Loading '+id+' / '+result.slot+' precomputed results…';
   try{
     const m=await readJSON(result.manifest); if(token!==selectionToken)return;
@@ -96,12 +92,12 @@ async function selectTree(id){
     const files=await Promise.all([m.context_html,m.warping_html].map(path=>fetch(path,{method:'HEAD',cache:'no-store'})));
     if(token!==selectionToken)return; if(files.some(r=>!r.ok))throw new Error('Selected plot files are missing; rerun the result export.');
     showPlot('context','contextEmpty',m.context_html,m.generated_at);showPlot('warp','warpEmpty',m.warping_html,m.generated_at);updateMap(t,m);
-    $('status').textContent=id+' / '+m.slot+' · '+m.context_receptors.toLocaleString()+' receptors · '+m.contributor_samples.toLocaleString()+' contributor samples · '+m.heights_m.length+' height layers. Precomputed analysis.';
+
   }catch(error){if(token!==selectionToken)return;clearPlot('context','contextEmpty','Selected export could not be loaded.');
-    clearPlot('warp','warpEmpty','Selected export could not be loaded.');$('status').textContent=error.message}
+    clearPlot('warp','warpEmpty','Selected export could not be loaded.');$('status').textContent=error.message;$('status').hidden=false}
 }
 $('treeSelect').addEventListener('change',event=>{selectTree(event.target.value);history.replaceState(null,'','#'+event.target.value)});
-$('near').addEventListener('click',()=>sendScene('urf:focus',{mode:'near'}));$('whole').addEventListener('click',()=>sendScene('urf:focus',{mode:'whole'}));
+$('timeSelect').addEventListener('change',event=>{currentSlot=event.target.value;selectTree(currentId)});$('whole').addEventListener('click',()=>sendScene('urf:focus',{mode:'whole'}));
 window.addEventListener('message',event=>{
   if(event.source!==$('scene').contentWindow || (location.protocol!=='file:'&&event.origin!==location.origin))return;
   if(event.data?.type==='urf:ready')sendScene('urf:highlight');
@@ -114,5 +110,5 @@ window.addEventListener('message',event=>{
   trees=registry.trees;lookup=new Map(trees.map(t=>[t.tree_id,t]));availability=await readJSON('availability.json',true)||{results:{}};
   $('treeSelect').replaceChildren(...trees.map(t=>{const o=document.createElement('option');o.value=t.tree_id;o.textContent=t.tree_id+(availability.results?.[t.tree_id]?' · results available':'');return o}));
   $('treeSelect').disabled=false;const requested=decodeURIComponent(location.hash.slice(1));await selectTree(lookup.has(requested)?requested:'T02');
-}catch(error){$('status').textContent=error.message;clearPlot('context','contextEmpty','Export notebook 04 Part 6, then notebook 03 Part 9 → Part 10.');clearPlot('warp','warpEmpty','Waiting for the T02 result export.')}})();
+}catch(error){$('status').hidden=false;$('status').textContent=error.message;clearPlot('context','contextEmpty','Export notebook 04 Part 6, then notebook 03 Part 9 → Part 10.');clearPlot('warp','warpEmpty','Waiting for the T02 result export.')}})();
 </script></body></html>
