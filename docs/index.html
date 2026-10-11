@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>☀️ Thermal Clouds: 🌳 tree radiant warping explorer</title>
+<title>☀️ Thermal Clouds: 🌳 Tree radiant warping explorer</title>
 <meta name="description" content="Explore 107 Dubai trees, precomputed MRT contributors and warped temperature differences.">
 <style>
 :root{color-scheme:dark;--ink:#f0f0f0;--muted:#b9b9bf;--line:#444449;--accent:#dadade}
@@ -23,15 +23,16 @@ iframe{border:0;width:100%;display:block;background:#29292e}.scene{height:590px}
 #coords{font-variant-numeric:tabular-nums}.mapmeta{padding:16px 20px}.mapmeta a{display:inline-block;margin-top:12px}
 footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900px){main{padding:16px}header{display:block}.grid{grid-template-columns:1fr}.component-grid{grid-template-columns:1fr}.wide{grid-column:auto}.warpcard .cardhead{width:190px;padding:14px;font-size:13px}.warpcard h2{font-size:16px}.toolbar{margin-top:18px}.scene{height:500px}.context{height:620px}.warp{height:730px}}
 </style></head><body><main>
-<header><div><h1>☀️ Thermal Clouds: 🌳 tree radiant warping explorer</h1>
+<header><div><h1>☀️ Thermal Clouds: 🌳 Tree radiant warping explorer</h1>
 <p class="muted">1 Select a tree in the thermal cloud → 2 See what influences radiation around that tree → 3 Check its real-life position → 4 Inspect MRT → 5 Compare tree-induced change → 6 Separate SW and LW → 7 Explore the warped field.</p></div>
 </header>
+<div class="status availability-notice"><strong>Results availability:</strong> Calculated results are currently available only for tree T02 at 1 pm. Other trees and times can be selected, but their radiation results are not yet available.</div>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
 <div class="grid">
 <section class="card"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
 <p class="note">Click a green crown to select a tree. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p><div class="toolbar selection-controls"><div class="selection-row"><label for="treeSelect">Tree</label><select id="treeSelect" disabled><option>Loading…</option></select>
 </div><div class="selection-row"><label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">6 am</option><option value="0800">8 am</option><option value="1100">11 am</option><option value="1300" selected>1 pm</option></select></div></div></div>
-<iframe id="scene" class="scene" src="scene.html?v=20261011T071229102102" title="Dubai point cloud and 107 selectable trees"></iframe>
+<iframe id="scene" class="scene" src="scene.html?v=20261011T072013060985" title="Dubai point cloud and 107 selectable trees"></iframe>
 <div class="cardfoot">All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
 <section class="card"><div class="cardhead"><h2><span class="number">02</span>MRT contributors</h2>
 <p class="note">Receptor colours show mean radiant temperature (MRT). The surrounding points show sampled surfaces, reflections and solar-glint sources contributing to radiation around the tree.</p></div>
