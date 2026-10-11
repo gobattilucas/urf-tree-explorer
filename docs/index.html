@@ -3,35 +3,35 @@
 <title>Thermal Clouds: tree warping explorer</title>
 <meta name="description" content="Explore 107 Dubai trees, precomputed MRT contributors and warped temperature differences.">
 <style>
-:root{color-scheme:light;--ink:#17332b;--muted:#5d706a;--line:#dce5df;--accent:#236c4a}
-*{box-sizing:border-box}body{margin:0;background:#f4f7f4;color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+:root{color-scheme:dark;--ink:#f0f0f0;--muted:#b9b9bf;--line:#444449;--accent:#dadade}
+*{box-sizing:border-box}body{margin:0;background:#19191c;color:var(--ink);font:15px/1.5 system-ui,sans-serif}
 main{max-width:1560px;margin:auto;padding:28px}header{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px}
 h1{font-size:clamp(24px,3vw,36px);font-weight:600;letter-spacing:-.035em;line-height:1.15;margin:8px 0}
 h2{font-size:19px;margin:0}p{margin:6px 0}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 .muted,.note{color:var(--muted)}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.toolbar label{font-weight:600}
-select,button,a.button{font:inherit;border:1px solid #bdcdc3;border-radius:7px;padding:8px 12px;background:white;color:var(--ink)}
-button,a.button{cursor:pointer;text-decoration:none}button:hover,a.button:hover{background:#edf4ee}select{min-width:155px}
+select,button,a.button{font:inherit;border:1px solid #55555d;border-radius:7px;padding:8px 12px;background:#29292e;color:var(--ink)}
+button,a.button{cursor:pointer;text-decoration:none}button:hover,a.button:hover{background:#3a3a41}select{min-width:155px}
 :focus-visible{outline:3px solid #d39a2e;outline-offset:3px}.summary{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
-.pill{border:1px solid var(--line);background:white;border-radius:20px;padding:5px 12px;font-size:13px}
-.mapcard{display:flex;flex-direction:column}.mapcard .map{flex:1;min-height:400px}.status{padding:11px 15px;background:#e7f1e9;border-radius:8px;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{background:white;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
-.wide{grid-column:1/-1}.cardhead{padding:18px 20px 12px;border-bottom:1px solid #eef1ed}.number{color:var(--accent);margin-right:8px}
-iframe{border:0;width:100%;display:block;background:white}.scene{height:590px}.context{height:640px}.warp{height:640px}.map{height:420px}
-.empty{min-height:250px;display:grid;place-content:center;text-align:center;padding:30px;color:var(--muted);background:#fafcf9}
-[hidden]{display:none!important}.cardfoot{padding:12px 20px;font-size:13px;border-top:1px solid #eef1ed}
+.pill{border:1px solid var(--line);background:#29292e;border-radius:20px;padding:5px 12px;font-size:13px}
+.mapcard{display:flex;flex-direction:column}.mapcard .map{flex:1;min-height:400px}.status{padding:11px 15px;background:#303037;border-radius:8px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.card{background:#29292e;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.wide{grid-column:1/-1}.cardhead{padding:18px 20px 12px;border-bottom:1px solid #444449}.number{color:var(--accent);margin-right:8px}
+iframe{border:0;width:100%;display:block;background:#29292e}.scene{height:590px}.context{height:640px}.warp{height:640px}.map{height:420px}
+.empty{min-height:250px;display:grid;place-content:center;text-align:center;padding:30px;color:var(--muted);background:#242428}
+[hidden]{display:none!important}.cardfoot{padding:12px 20px;font-size:13px;border-top:1px solid #444449}
 #coords{font-variant-numeric:tabular-nums}.mapmeta{padding:16px 20px}.mapmeta a{display:inline-block;margin-top:12px}
 footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900px){main{padding:16px}header{display:block}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.toolbar{margin-top:18px}.scene{height:500px}.context{height:620px}.warp{height:730px}}
 </style></head><body><main>
-<header><div><div class="eyebrow">Urban radiant field · Dubai · v3</div><h1>Thermal Clouds: tree warping explorer</h1>
-<p class="muted">Select a tree in the scene to explore its location and calculated radiation field.</p></div>
+<header><div><h1>Thermal Clouds: tree warping explorer</h1>
+<p class="muted">1 Select a tree in the thermal cloud → 2 Check its real-life position → 3 See what influences radiation around that tree → 4 Check how the tree influences radiation.</p></div>
 <div class="toolbar"><label for="treeSelect">Tree</label><select id="treeSelect" disabled><option>Loading…</option></select>
 <label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">6 am</option><option value="0800">8 am</option><option value="1100">11 am</option><option value="1300" selected>1 pm</option></select></div></header>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
 <div class="grid">
 <section class="card"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
-<p class="note">Click a green crown or seed marker. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p><button id="whole" type="button">Whole scene</button></div>
-<iframe id="scene" class="scene" src="scene.html?v=20261011T054653714098" title="Dubai point cloud and 107 selectable trees"></iframe>
-<div class="cardfoot">Notebook 04 Part 4 display data. All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
+<p class="note">Click a green crown to select a tree. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p></div>
+<iframe id="scene" class="scene" src="scene.html?v=20261011T060831073570" title="Dubai point cloud and 107 selectable trees"></iframe>
+<div class="cardfoot">All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
 <section class="card mapcard"><div class="cardhead"><h2><span class="number">02</span>Google Maps location</h2>
 <p class="note">Approximate geographic position</p></div><div class="mapmeta"><strong id="mapTree">T02</strong>
 <p id="coords">—</p><p id="geoNote" class="note">Mesh-derived coordinates; drone-GPS uncertainty is a few metres.</p>
@@ -39,15 +39,15 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <div id="mapEmpty" class="empty">Map embed has not been configured.</div>
 <iframe id="map" class="map" hidden title="Google Maps location of the selected tree" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></section>
 <section class="card"><div class="cardhead"><h2><span class="number">03</span>MRT contributors</h2>
-<p class="note">Notebook 03 Part 7 · full contributor extent</p></div>
+<p class="note">Receptor colours show mean radiant temperature (MRT). The surrounding points show sampled surfaces, reflections and solar-glint sources contributing to radiation around the tree.</p></div>
 <div id="contextEmpty" class="empty">Select a tree with exported results.</div>
 <iframe id="context" class="context" hidden title="Full extent of MRT contributor points"></iframe>
 <div class="cardfoot">Standing-tree sampled pathways. Counts describe sampling frequency, not energy weights or attribution of the tree-removal effect.</div></section>
 <section class="card"><div class="cardhead"><h2><span class="number">04</span>Warped ΔMRT visualiser</h2>
-<p class="note">Notebook 03 Part 9 · blue valleys = cooling · white = near zero · red peaks = warming</p></div>
+<p class="note">Relief shows ΔMRT with the tree minus without it: blue valleys indicate cooling, white is near zero and red peaks indicate warming. Layers are terrain-flattened; relief encodes temperature, and the pedestrian, trunk and branches are schematic references.</p></div>
 <div id="warpEmpty" class="empty">Select a tree with exported results.</div>
 <iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe>
-<div class="cardfoot">ΔMRT = with tree − without tree. Relief is an illustrative temperature encoding on terrain-flattened layers; the pedestrian, trunk and branches are schematic references.</div></section>
+</section>
 </div><footer>Precomputed results · first case T02 / 1300. Rotate, inspect and change display layers; new radiation calculations are prepared offline.</footer>
 </main><script>
 'use strict';
@@ -97,7 +97,7 @@ async function selectTree(id){
     clearPlot('warp','warpEmpty','Selected export could not be loaded.');$('status').textContent=error.message;$('status').hidden=false}
 }
 $('treeSelect').addEventListener('change',event=>{selectTree(event.target.value);history.replaceState(null,'','#'+event.target.value)});
-$('timeSelect').addEventListener('change',event=>{currentSlot=event.target.value;selectTree(currentId)});$('whole').addEventListener('click',()=>sendScene('urf:focus',{mode:'whole'}));
+$('timeSelect').addEventListener('change',event=>{currentSlot=event.target.value;selectTree(currentId)});
 window.addEventListener('message',event=>{
   if(event.source!==$('scene').contentWindow || (location.protocol!=='file:'&&event.origin!==location.origin))return;
   if(event.data?.type==='urf:ready')sendScene('urf:highlight');
