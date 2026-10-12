@@ -1,10 +1,29 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "results": {
     "T02": {
-      "slot": "1300",
-      "manifest": "trees/T02/1300/20261011T035801555761Z/manifest.json",
-      "generated_at": "2026-10-11T03:58:01.555745+00:00"
+      "1300": {
+        "slot": "1300",
+        "manifest": "trees/T02/1300/20261012T082941205764Z/manifest.json",
+        "generated_at": "2026-10-12T08:29:41.205757+00:00"
+      },
+      "0600": {
+        "slot": "0600",
+        "manifest": "trees/T02/0600/20261012T083423431813Z/manifest.json",
+        "generated_at": "2026-10-12T08:34:23.431806+00:00"
+      },
+      "1100": {
+        "slot": "1100",
+        "manifest": "trees/T02/1100/20261012T083820205787Z/manifest.json",
+        "generated_at": "2026-10-12T08:38:20.205780+00:00"
+      }
+    }
+  },
+  "unavailable": {
+    "T02": {
+      "0800": {
+        "reason": "08:07 covers Barsha Heights South; T02 is in The Greens with zero covered nearby standpoints and no matching source export."
+      }
     }
   }
 }

@@ -27,13 +27,13 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <header><div><h1>☀️ Thermal Clouds: 🌳 Tree radiant warping explorer</h1>
 <p class="muted">1 Select a tree in the thermal cloud → 2 See what influences radiation around that tree → 3 Check its real-life position → 4 Inspect MRT → 5 Compare tree-induced change → 6 Separate SW and LW → 7 Explore the warped field.</p></div>
 </header>
-<div class="status availability-notice"><strong>Results availability:</strong> Calculated results are currently available only for tree T02 at 1 pm. Other trees and times can be selected, but their radiation results are not yet available.</div>
+<div class="status availability-notice"><strong>Results availability:</strong> Calculated results are available only for tree T02 at 06:24, 10:59 and 13:32 (Dubai time, 24 September 2026). The 08:07 flight does not cover T02 sufficiently; other trees have not yet been processed. New-time downloads will be added later.</div>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
 <div class="grid">
 <section class="card"><div class="cardhead"><h2><span class="number">01</span>Environment &amp; tree selection</h2>
 <p class="note">Click a green crown to select a tree. Orange marks the selected tree. Drag to rotate; scroll to zoom.</p><div class="toolbar selection-controls"><div class="selection-row"><label for="treeSelect">Tree</label><select id="treeSelect" disabled><option>Loading…</option></select>
-</div><div class="selection-row"><label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">6 am</option><option value="0800">8 am</option><option value="1100">11 am</option><option value="1300" selected>1 pm</option></select></div></div></div>
-<iframe id="scene" class="scene" src="scene.html?v=20261011T075435585926" title="Dubai point cloud and 107 selectable trees"></iframe>
+</div><div class="selection-row"><label for="timeSelect">Time of day</label><select id="timeSelect"><option value="0600">06:24</option><option value="0800">08:07 · unavailable</option><option value="1100">10:59</option><option value="1300" selected>13:32</option></select></div></div></div>
+<iframe id="scene" class="scene" src="scene.html?v=20261012T123356874375" title="Dubai point cloud and 107 selectable trees"></iframe>
 <div class="cardfoot">All catalogue seeds remain selectable, including trees without a crown extraction.</div></section>
 <section class="card"><div class="cardhead"><h2><span class="number">02</span>MRT contributors</h2>
 <p class="note">Receptor colours show mean radiant temperature (MRT). The surrounding points show sampled surfaces, reflections and solar-glint sources contributing to radiation around the tree.</p></div>
@@ -67,11 +67,11 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <div id="warpEmpty" class="empty">Select a tree with exported results.</div>
 <iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe><div class="cardfoot download-group" data-download-group="warp"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="warped_all" disabled>⬇️ ☀️ Warped ΔMRT · all heights</button><button type="button" data-download="warped_1p1m" disabled>⬇️ ☀️ Warped ΔMRT · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div>
 </section>
-</div><footer>Precomputed results · first case T02 / 1300. Rotate, inspect and change display layers; new radiation calculations are prepared offline.</footer>
+</div><footer>Precomputed results · T02 at three observed flight times. Rotate, inspect and change display layers; new radiation calculations are prepared offline.</footer>
 </main><dialog id="downloadDialog" aria-labelledby="downloadDialogTitle"><form id="downloadForm">
 <h2 id="downloadDialogTitle">Download protected PLY</h2><p id="downloadFileLabel"></p>
-<label for="downloadPassword">Download passphrase</label><input id="downloadPassword" type="password" autocomplete="off" required>
-<p id="downloadMessage" role="status" aria-live="polite">Enter the passphrase shared by the author.</p>
+<label for="downloadPassword">Download password</label><input id="downloadPassword" type="password" autocomplete="off" required>
+<p id="downloadMessage" role="status" aria-live="polite">Enter the password shared by the author.</p>
 <div class="toolbar"><button id="downloadSubmit" type="submit">⬇️ Unlock &amp; download</button><button id="downloadCancel" type="button">Cancel</button></div>
 </form></dialog><script>
 'use strict';
@@ -124,8 +124,10 @@ async function selectTree(id){
   $('status').hidden=true;
   sendScene('urf:highlight'); updateMap(t);
   clearAnalysis('Loading selected results…');
-  const result=availability.results?.[id];
-  if(!result || result.slot!==currentSlot){const msg=id+' / '+$('timeSelect').selectedOptions[0].textContent+' — MRT analysis is not available yet.';
+  const entry=availability.results?.[id];
+  const result=entry?.manifest?(entry.slot===currentSlot?entry:null):entry?.[currentSlot];
+  if(!result){const reason=availability.unavailable?.[id]?.[currentSlot]?.reason;
+    const msg=id+' / '+$('timeSelect').selectedOptions[0].textContent+' — '+(reason||'MRT analysis is not available yet.');
     clearAnalysis(msg);
     return}
   $('status').textContent='Loading '+id+' / '+result.slot+' precomputed results…';
@@ -165,7 +167,7 @@ function refreshDownloads(){
     button.title=button.disabled?'Downloads are not available for this selection.':'Password-protected PLY download';
   }
   for(const note of document.querySelectorAll('.download-note'))note.textContent=currentManifest
-    ? (currentManifest.downloads?'All heights includes hidden layers. A passphrase is required.':'Protected PLY files have not been exported for this result yet.')
+    ? (currentManifest.downloads?'All heights includes hidden layers. A password is required.':'Protected PLY files have not been exported for this result yet.')
     : 'Select a tree/time with exported downloads.';
 }
 function cancelDownload(){
@@ -181,7 +183,7 @@ for(const button of document.querySelectorAll('[data-download]'))button.addEvent
   pendingDownload={item,token:selectionToken};
   $('downloadFileLabel').textContent=item.filename;
   $('downloadPassword').value='';$('downloadSubmit').disabled=false;
-  $('downloadMessage').textContent='Enter the passphrase shared by the author.';
+  $('downloadMessage').textContent='Enter the password shared by the author.';
   $('downloadDialog').showModal();$('downloadPassword').focus();
 });
 $('downloadForm').addEventListener('submit',async event=>{
@@ -202,7 +204,7 @@ $('downloadForm').addEventListener('submit',async event=>{
       material,{name:'AES-GCM',length:256},false,['decrypt']);
     let plaintext;
     try{plaintext=await crypto.subtle.decrypt({name:'AES-GCM',iv:decode64(request.item.nonce),additionalData:decode64(request.item.aad),tagLength:128},key,ciphertext)}
-    catch{throw new Error('Incorrect passphrase or damaged file. Please try again.')}
+    catch{throw new Error('Incorrect password or damaged file. Please try again.')}
     // Cancelling or changing tree/time prevents an in-flight result from downloading.
     if(pendingDownload!==request || request.token!==selectionToken)return;
     if(new TextDecoder().decode(plaintext.slice(0,4))!=='ply\n')throw new Error('Unlocked file is not a PLY.');
