@@ -16,7 +16,7 @@ button,a.button{cursor:pointer;text-decoration:none}button:hover,a.button:hover{
 .mapcard{display:flex;flex-direction:column}.mapcard .map{flex:1;min-height:400px}.status{padding:11px 15px;background:#303037;border-radius:8px;margin-bottom:20px}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.card{background:#29292e;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
 .wide{grid-column:1/-1}.cardhead .toolbar{margin-top:14px;justify-content:flex-start}.cardhead .selection-controls{display:grid;gap:10px}.selection-row{display:flex;gap:10px;align-items:center}.selection-row label{min-width:90px}.cardhead{padding:18px 20px 12px;border-bottom:1px solid #444449}.number{color:var(--accent);margin-right:8px}
-iframe{border:0;width:100%;display:block;background:#29292e}.scene{height:590px}.context{height:640px}.warp{height:760px}.warpcard{position:relative}.warpcard .cardhead{position:absolute;z-index:1;top:0;left:0;width:260px;border:0;background:#29292e}.warpcard .empty{padding-left:280px;min-height:760px}.map{height:420px}
+iframe{border:0;width:100%;display:block;background:#29292e}.scene{height:590px}.context{height:640px}.warp{height:760px}.warpcard{position:relative}.warpcard .cardhead{position:absolute;z-index:1;top:0;left:0;width:260px;border:0;background:#29292e}.warpcard .empty{padding-left:280px;min-height:760px}.map{height:420px}.donorPlot{height:850px}.radialPlot{height:1100px}.donorcard .empty{min-height:850px}
 .component-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.componenthead{padding:16px 20px 0;min-height:150px}.componenthead h3{margin:0 0 6px;font-size:18px}.measure{font-weight:600}.component{height:650px}button[aria-pressed="true"]{background:#50505a;border-color:#9999a3}button:disabled{cursor:default;opacity:.5}
 .empty{min-height:250px;display:grid;place-content:center;text-align:center;padding:30px;color:var(--muted);background:#242428}
 [hidden]{display:none!important}.cardfoot{padding:12px 20px;font-size:13px;border-top:1px solid #444449}
@@ -25,7 +25,7 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 .download-buttons{display:flex;gap:10px;flex-wrap:wrap}.download-buttons button{text-align:left;font-size:14px}.download-group .note{margin-bottom:10px}.download-note{margin-top:10px}dialog{color:#ededf0;background:#29292e;border:1px solid #55555d;border-radius:12px;max-width:440px;width:calc(100% - 32px);padding:24px}dialog::backdrop{background:rgba(0,0,0,.65)}dialog input{display:block;width:100%;margin:8px 0 12px;padding:10px;background:#fff;color:#000;border:1px solid #aaa;border-radius:6px;font:inherit}dialog .toolbar{margin-top:16px}
 </style></head><body><main>
 <header><div><h1>☀️ Thermal Clouds: 🌳 Tree radiant warping explorer</h1>
-<p class="muted">1 Select a tree in the thermal cloud → 2 See what influences radiation around that tree → 3 Check its real-life position → 4 Inspect MRT → 5 Compare tree-induced change → 6 Separate SW and LW → 7 Explore the warped field.</p></div>
+<p class="muted">1 Select a tree in the thermal cloud → 2 See what influences radiation around that tree → 3 Check its real-life position → 4 Inspect MRT → 5 Compare tree-induced change → 6 Separate SW and LW → 7 Explore the warped field → 8 Inspect shade and donor patches → 9 Compare radiation by distance.</p></div>
 </header>
 <div class="status availability-notice"><strong>Results availability:</strong> Calculated results are available only for tree T02 at 06:24, 10:59 and 13:32 (Dubai time, 24 September 2026). The 08:07 flight does not cover T02 sufficiently; other trees have not yet been processed. New-time downloads will be added later.</div>
 <div id="status" class="status" role="status" aria-live="polite" hidden></div>
@@ -67,6 +67,14 @@ footer{margin:22px 0 5px;font-size:13px;color:var(--muted)}@media(max-width:900p
 <div id="warpEmpty" class="empty">Select a tree with exported results.</div>
 <iframe id="warp" class="warp" hidden title="Warped delta MRT with tree, pedestrian and sunlight"></iframe><div class="cardfoot download-group" data-download-group="warp"><p class="note">Password-protected PLY downloads</p><div class="download-buttons"><button type="button" data-download="warped_all" disabled>⬇️ ☀️ Warped ΔMRT · all heights</button><button type="button" data-download="warped_1p1m" disabled>⬇️ ☀️ Warped ΔMRT · 1.1 m</button></div><p class="download-note note">Select a tree/time with exported downloads.</p></div>
 </section>
+<section class="card wide warpcard donorcard"><div class="cardhead"><h2><span class="number">08</span>Tree shade &amp; donor patches</h2>
+<p class="note">Green points show the measured tree. Ground patches show its shade and five nearby, sunlit donors for each supplied material label. The Sun arrow shows the lighting direction. Donors 1–5 span measured longwave emission; their numbers do not indicate quality.</p></div>
+<div id="donorsEmpty" class="empty">Select a tree with an exported donor map.</div>
+<iframe id="donors" class="donorPlot" hidden loading="lazy" title="Tree shade, material-matched ground donors and Sun direction"></iframe></section>
+<section class="card wide"><div class="cardhead"><h2><span class="number">09</span>Radiation versus tree distance</h2>
+<p class="note">Lines show mean values in distance rings, comparing the standing tree with removal using donor 1 for each material. Shaded bands show the 10th–90th percentile spread of receptor values in each distance ring, not confidence intervals. Donor 1 is the first sampled longwave case; the earlier ΔMRT panels retain their selected donor case, normally donor 3.</p></div>
+<div id="radialEmpty" class="empty">Select a tree with exported distance profiles.</div>
+<iframe id="radial" class="radialPlot" hidden loading="lazy" title="MRT, delta MRT and shortwave and longwave contributions versus tree distance"></iframe></section>
 </div><footer>Precomputed results · T02 at three observed flight times. Rotate, inspect and change display layers; new radiation calculations are prepared offline.</footer>
 </main><dialog id="downloadDialog" aria-labelledby="downloadDialogTitle"><form id="downloadForm">
 <h2 id="downloadDialogTitle">Download protected PLY</h2><p id="downloadFileLabel"></p>
@@ -79,7 +87,7 @@ const CONFIG={"t02EmbedUrl": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m
 const $=id=>document.getElementById(id);
 let trees=[],lookup=new Map(),availability={results:{}},currentId='T02',currentSlot='1300',selectionToken=0;
 let currentManifest=null,componentMode='MRT';
-const analysisFrames=['context','mrt','delta','sw','lw','warp'];
+const analysisFrames=['context','mrt','delta','sw','lw','warp','donors','radial'];
 const targetOrigin=location.protocol==='file:'?'*':location.origin;
 function sendScene(type,extra={}){$('scene').contentWindow?.postMessage({type,treeId:currentId,...extra},targetOrigin)}
 async function readJSON(path,optional=false){
@@ -136,9 +144,18 @@ async function selectTree(id){
     if(m.schema_version!==2 || m.tree_id!==id || m.slot!==result.slot || m.bundle!=='URF_Handover-main_v3' || m.candidate_key!==t.candidate_key)
       throw new Error('Result identity does not match the selected catalogue tree.');
     const plotPaths=[m.context_html,m.mrt_html,m.delta_html,m.warping_html,...['MRT','deltaMRT'].flatMap(mode=>['SW','LW'].map(component=>m.components_html?.[mode]?.[component]))];
-    for(const path of plotPaths)if(typeof path!=='string'||!path.startsWith('trees/'+id+'/')||path.includes('..'))throw new Error('Invalid result path.');
-    const files=await Promise.all(plotPaths.map(path=>fetch(path,{method:'HEAD',cache:'no-store'})));
-    if(token!==selectionToken)return; if(files.some(r=>!r.ok))throw new Error('Selected plot files are missing; rerun the result export.');
+    const optionalPlots=[{frame:'donors',key:'donors_html',reason:m.donor_map_unavailable_reason||'Donor map not exported for this time yet.'},
+      {frame:'radial',key:'radial_html',reason:m.radial_unavailable_reason||'Distance profiles not exported for this time yet.'}];
+    const optionalPaths=optionalPlots.map(plot=>m[plot.key]).filter(path=>path!=null);
+    const allPlotPaths=[...plotPaths,...optionalPaths];
+    for(const path of allPlotPaths)if(typeof path!=='string'||!path.startsWith('trees/'+id+'/')||path.includes('..'))throw new Error('Invalid result path.');
+    const files=await Promise.all(allPlotPaths.map(path=>fetch(path,{method:'HEAD',cache:'no-store'})));
+    if(token!==selectionToken)return; if(files.slice(0,plotPaths.length).some(r=>!r.ok))throw new Error('Selected plot files are missing; rerun the result export.');
+    for(const plot of optionalPlots){
+      const path=m[plot.key],index=allPlotPaths.indexOf(path);
+      if(path!=null && files[index]?.ok)showPlot(plot.frame,plot.frame+'Empty',path,m.generated_at);
+      else clearPlot(plot.frame,plot.frame+'Empty',path!=null?'Selected plot file is missing; rerun the result export.':plot.reason);
+    }
     showPlot('context','contextEmpty',m.context_html,m.generated_at);
     showPlot('mrt','mrtEmpty',m.mrt_html,m.generated_at);
     showPlot('delta','deltaEmpty',m.delta_html,m.generated_at);
@@ -230,5 +247,5 @@ window.addEventListener('message',event=>{
   trees=registry.trees;lookup=new Map(trees.map(t=>[t.tree_id,t]));availability=await readJSON('availability.json',true)||{results:{}};
   $('treeSelect').replaceChildren(...trees.map(t=>{const o=document.createElement('option');o.value=t.tree_id;o.textContent=t.tree_id+(availability.results?.[t.tree_id]?' · results available':'');return o}));
   $('treeSelect').disabled=false;const requested=decodeURIComponent(location.hash.slice(1));await selectTree(lookup.has(requested)?requested:'T02');
-}catch(error){$('status').hidden=false;$('status').textContent=error.message;clearPlot('context','contextEmpty','Export notebook 04 Part 6, then notebook 03 Part 9 → Part 10.');clearPlot('warp','warpEmpty','Waiting for the T02 result export.')}})();
+}catch(error){$('status').hidden=false;$('status').textContent=error.message;clearAnalysis('Export notebook 04 Part 6, then notebook 03 Part 12 to load results.')}})();
 </script></body></html>
