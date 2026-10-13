@@ -240,5 +240,28 @@
   "plotly_python_version": "7.1.0",
   "delta_definition": "with tree minus without tree; negative cooling",
   "contributor_definition": "Standing-tree sampled paths; counts are sampling frequency, not energy or delta attribution.",
-  "terrain_definition": "Part 9 terrain is flattened; relief encodes delta MRT, not physical terrain."
+  "terrain_definition": "Part 9 terrain is flattened; relief encodes delta MRT, not physical terrain.",
+  "donors_html": "trees/T02/1100/20261013T115252253796Z/donors.html",
+  "radial_html": "trees/T02/1100/20261013T115252253796Z/radial.html",
+  "analysis_panels_generated_at": "2026-10-13T12:59:02.452677+00:00",
+  "analysis_panel_definitions": {
+    "donors": "Five supplied-material sunlit LW samples at tree-freed shade; shared schematic references and recorded Sun direction",
+    "radial": "Part10 ring means/P10\u2013P90 receptor spread using completed standing/D1; not confidence intervals",
+    "radial_removed_scenario": "D1",
+    "main_removed_scenario": "D3",
+    "donor_numbering": "Measured LW-range order, not a quality ranking",
+    "ground_donation_active": true,
+    "geometry": {
+      "geometry_source": "Current cached native-label supported ground; selected donor coordinates match completed slot CSVs",
+      "MRT_recalculated": false,
+      "donors_reselected": false,
+      "material_labels_changed": false,
+      "shade_source": "Recomputed flight-reference geometric sunlight on cached ground samples; no receptor radiation or donor selection recalculated",
+      "ray_offsets_m": [
+        0.01,
+        0.025,
+        0.05
+      ]
+    }
+  }
 }
