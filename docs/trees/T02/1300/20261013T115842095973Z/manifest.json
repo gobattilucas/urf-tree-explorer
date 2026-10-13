@@ -451,5 +451,23 @@
         "definition": "Warped receptor cloud only; x/y tree-centred; z illustrative warped elevation; exact 1.1 m layer"
       }
     }
+  },
+  "donors_html": "trees/T02/1300/20261013T115842095973Z/donors.html",
+  "radial_html": "trees/T02/1300/20261013T115842095973Z/radial.html",
+  "analysis_panels_generated_at": "2026-10-13T12:59:02.452677+00:00",
+  "analysis_panel_definitions": {
+    "donors": "Five supplied-material sunlit LW samples at tree-freed shade; shared schematic references and recorded Sun direction",
+    "radial": "Part10 ring means/P10\u2013P90 receptor spread using completed standing/D1; not confidence intervals",
+    "radial_removed_scenario": "D1",
+    "main_removed_scenario": "D3",
+    "donor_numbering": "Measured LW-range order, not a quality ranking",
+    "ground_donation_active": true,
+    "geometry": {
+      "geometry_source": "Current cached native-label supported ground; selected donor coordinates match completed slot CSVs",
+      "MRT_recalculated": false,
+      "donors_reselected": false,
+      "material_labels_changed": false,
+      "shade_source": "Completed 13:32 cached sensitivity mesh samples and exact hit examples"
+    }
   }
 }
