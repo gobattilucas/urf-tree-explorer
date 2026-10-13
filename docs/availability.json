@@ -4,18 +4,18 @@
     "T02": {
       "1300": {
         "slot": "1300",
-        "manifest": "trees/T02/1300/20261012T082941205764Z/manifest.json",
-        "generated_at": "2026-10-12T08:29:41.205757+00:00"
+        "manifest": "trees/T02/1300/20261013T115842095973Z/manifest.json",
+        "generated_at": "2026-10-13T11:58:42.095967+00:00"
       },
       "0600": {
         "slot": "0600",
-        "manifest": "trees/T02/0600/20261012T083423431813Z/manifest.json",
-        "generated_at": "2026-10-12T08:34:23.431806+00:00"
+        "manifest": "trees/T02/0600/20261013T114643179282Z/manifest.json",
+        "generated_at": "2026-10-13T11:46:43.179276+00:00"
       },
       "1100": {
         "slot": "1100",
-        "manifest": "trees/T02/1100/20261012T083820205787Z/manifest.json",
-        "generated_at": "2026-10-12T08:38:20.205780+00:00"
+        "manifest": "trees/T02/1100/20261013T115252253796Z/manifest.json",
+        "generated_at": "2026-10-13T11:52:52.253790+00:00"
       }
     }
   },
